@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace SistemMenjacnice
+namespace SistemMenjacnice.Services
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ExchangeService es = new ExchangeService();
+            es.ExchangeMenu();
         }
     }
 }
