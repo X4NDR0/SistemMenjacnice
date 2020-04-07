@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using SistemMenjacnice.Enums;
 using SistemMenjacnice.Models;
@@ -32,6 +33,8 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public void ExchangeMenu()
         {
+            string lokacijaValutaFajla = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\"));
+            LoadDataValuta(lokacijaValutaFajla + "data" + "\\" + "valuta.csv");
             do
             {
                 MenuText();
@@ -40,7 +43,14 @@ namespace SistemMenjacnice.Services
                 switch (opcije)
                 {   
                     case Enums.ExchangeMenu.IspisSvihValuta:
-
+                        Console.Clear();
+                        foreach (Valuta valuta in listaValuta)
+                        {
+                            Console.WriteLine(valuta.ID + " " + valuta.Naziv + " " + "{0:0.00}" + " {1:0.00}" + " {2:0.00}",valuta.Prodajni,valuta.Srednji,valuta.Kupovni);
+                        }
+                        Console.WriteLine("Press any key to back in menu...");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case Enums.ExchangeMenu.IspisOdredjeneKursneListe:
@@ -52,7 +62,7 @@ namespace SistemMenjacnice.Services
                         break;
 
                     case Enums.ExchangeMenu.Exit:
-
+                        Environment.Exit(0);
                         break;
 
                     default:
@@ -61,6 +71,28 @@ namespace SistemMenjacnice.Services
                 }
 
             } while (opcije != Enums.ExchangeMenu.Exit);
+        }
+
+        /// <summary>
+        /// Representing method for load data of Valuta
+        /// </summary>
+        public void LoadDataValuta(string fileName)
+        {
+            string line = string.Empty;
+            if (File.Exists(fileName))
+            {
+                using (StreamReader citac = File.OpenText(fileName))
+                {
+                    while ((line = citac.ReadLine()) != null)
+                    {
+                        listaValuta.Add(new Valuta(line));
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Greska,datoteka nije pronadjena!");
+            }
         }
 
     }

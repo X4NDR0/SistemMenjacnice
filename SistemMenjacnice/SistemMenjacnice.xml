@@ -4,5 +4,112 @@
         <name>SistemMenjacnice</name>
     </assembly>
     <members>
+        <member name="T:SistemMenjacnice.Enums.ExchangeMenu">
+            <summary>
+            Class representing Exchange Enum
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Enums.ExchangeMenu.IspisSvihValuta">
+            <summary>
+            Representing value of the enum
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Enums.ExchangeMenu.IspisOdredjeneKursneListe">
+            <summary>
+            Representing value of the enum
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Enums.ExchangeMenu.KreiranjeKursneListe">
+            <summary>
+            Representing value of the enum
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Enums.ExchangeMenu.Exit">
+            <summary>
+            Representing value of the enum
+            </summary>
+        </member>
+        <member name="T:SistemMenjacnice.Models.KursnaLista">
+            <summary>
+            Representing class of the KursnaLista
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Models.KursnaLista.#ctor(System.String)">
+            <summary>
+            Cosntructor with paramethar of the class
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="F:SistemMenjacnice.Models.KursnaLista.ID">
+            <summary>
+            Representing property of the ID
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.KursnaLista.DatumFormiranja">
+            <summary>
+            Representing property of the DatumKreiranja
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.KursnaLista.listaValuta">
+            <summary>
+            Representing list of the valuta
+            </summary>
+        </member>
+        <member name="T:SistemMenjacnice.Models.Valuta">
+            <summary>
+            Class representing Valuta
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Models.Valuta.#ctor(System.String)">
+            <summary>
+            Constructor with parametar of the class
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="F:SistemMenjacnice.Models.Valuta.ID">
+            <summary>
+            Representing property of the id
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.Valuta.Naziv">
+            <summary>
+            Representing property of the name
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.Valuta.Kupovni">
+            <summary>
+            Representing property of the prices
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.Valuta.Prodajni">
+            <summary>
+            Representing property of the price
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Models.Valuta.Srednji">
+            <summary>
+            Representing property of the price
+            </summary>
+        </member>
+        <member name="T:SistemMenjacnice.Services.ExchangeService">
+            <summary>
+            Class representing ExchangeService
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Services.ExchangeService.MenuText">
+            <summary>
+            Method representing MenuText
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Services.ExchangeService.ExchangeMenu">
+            <summary>
+            Method representing ExchangeMenu
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Services.ExchangeService.LoadDataValuta(System.String)">
+            <summary>
+            Representing method for load data of Valuta
+            </summary>
+        </member>
     </members>
 </doc>

@@ -10,13 +10,37 @@ namespace SistemMenjacnice.Models
     public class KursnaLista
     {
         /// <summary>
+        /// Cosntructor with paramethar of the class
+        /// </summary>
+        /// <param name="data"></param>
+        public KursnaLista(string data)
+        {
+            string[] niz = data.Split(";");
+
+            if (niz.Length != 2)
+            {
+                Console.WriteLine("Error while reading the file.");
+            }else
+            {
+                Int32.TryParse(niz[0], out ID);
+                DatumFormiranja = niz[1];
+            }
+
+        }
+
+        /// <summary>
+        /// Representing property of the ID
+        /// </summary>
+        public int ID;
+
+        /// <summary>
         /// Representing property of the DatumKreiranja
         /// </summary>
         public string DatumFormiranja;
 
         /// <summary>
-        /// Representing property of the Kupovna,Srednja,Prodajna vrenost
+        /// Representing list of the valuta
         /// </summary>
-        public double KupovnaVrednost, SrednjaVrednost, ProdajnaVrednost;
+        public List<Valuta> listaValuta = new List<Valuta>();
     }
 }
