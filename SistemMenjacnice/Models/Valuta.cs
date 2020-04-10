@@ -10,6 +10,14 @@ namespace SistemMenjacnice.Models
     public class Valuta
     {
         /// <summary>
+        /// Representing empty contructor of the class
+        /// </summary>
+        public Valuta()
+        {
+
+        }
+
+        /// <summary>
         /// Constructor with parametar of the class
         /// </summary>
         /// <param name="data"></param>

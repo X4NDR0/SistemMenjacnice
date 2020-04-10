@@ -34,6 +34,11 @@
             Representing class of the KursnaLista
             </summary>
         </member>
+        <member name="M:SistemMenjacnice.Models.KursnaLista.#ctor">
+            <summary>
+            Representing empty contructor of the class
+            </summary>
+        </member>
         <member name="M:SistemMenjacnice.Models.KursnaLista.#ctor(System.String)">
             <summary>
             Cosntructor with paramethar of the class
@@ -58,6 +63,11 @@
         <member name="T:SistemMenjacnice.Models.Valuta">
             <summary>
             Class representing Valuta
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Models.Valuta.#ctor">
+            <summary>
+            Representing empty contructor of the class
             </summary>
         </member>
         <member name="M:SistemMenjacnice.Models.Valuta.#ctor(System.String)">
@@ -96,6 +106,11 @@
             Class representing ExchangeService
             </summary>
         </member>
+        <member name="F:SistemMenjacnice.Services.ExchangeService.listaValuta">
+            <summary>
+            Representing List of the valuta
+            </summary>
+        </member>
         <member name="M:SistemMenjacnice.Services.ExchangeService.MenuText">
             <summary>
             Method representing MenuText
@@ -106,9 +121,29 @@
             Method representing ExchangeMenu
             </summary>
         </member>
-        <member name="M:SistemMenjacnice.Services.ExchangeService.LoadDataValuta(System.String)">
+        <member name="M:SistemMenjacnice.Services.ExchangeService.WriteAllCurrency">
             <summary>
-            Representing method for load data of Valuta
+            Representing method for writing all currency
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Services.ExchangeService.WriteSelectedExchangeRate">
+            <summary>
+            Representing method for writing selected exchange rate
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Services.ExchangeService.CreateExchangeRate">
+            <summary>
+            Representing method for creating exchange rate
+            </summary>
+        </member>
+        <member name="T:SistemMenjacnice.Utils.Helper">
+            <summary>
+            Representing class 
+            </summary>
+        </member>
+        <member name="M:SistemMenjacnice.Utils.Helper.ProveraCelogBroja">
+            <summary>
+            Representing method checking integer
             </summary>
         </member>
     </members>

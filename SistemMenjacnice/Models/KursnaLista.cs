@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemMenjacnice.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +10,14 @@ namespace SistemMenjacnice.Models
     /// </summary>
     public class KursnaLista
     {
+        /// <summary>
+        /// Representing empty contructor of the class
+        /// </summary>
+        public KursnaLista()
+        {
+
+        }
+
         /// <summary>
         /// Cosntructor with paramethar of the class
         /// </summary>
