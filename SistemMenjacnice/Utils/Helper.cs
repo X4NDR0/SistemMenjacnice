@@ -23,5 +23,15 @@ namespace SistemMenjacnice.Utils
 
             return number;
         }
+
+        /// <summary>
+        /// Representing property of the ID
+        /// </summary>
+        public static int IDKursneListe;
+
+        /// <summary>
+        /// Representing property of the ID
+        /// </summary>
+        public static int IDValute;
     }
 }

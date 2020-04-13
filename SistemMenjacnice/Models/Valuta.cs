@@ -18,6 +18,19 @@ namespace SistemMenjacnice.Models
         }
 
         /// <summary>
+        /// Representing constructor with 2 parametars
+        /// </summary>
+        /// <param name="prodajni"></param>
+        /// <param name="kupovni"></param>
+        public Valuta(string naziv,double kupovni,double prodajni)
+        {
+            Naziv = naziv;
+            Prodajni = prodajni;
+            Srednji = (prodajni + kupovni) / 2;
+            Kupovni = kupovni;
+        }
+
+        /// <summary>
         /// Constructor with parametar of the class
         /// </summary>
         /// <param name="data"></param>

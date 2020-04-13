@@ -70,6 +70,13 @@
             Representing empty contructor of the class
             </summary>
         </member>
+        <member name="M:SistemMenjacnice.Models.Valuta.#ctor(System.String,System.Double,System.Double)">
+            <summary>
+            Representing constructor with 2 parametars
+            </summary>
+            <param name="prodajni"></param>
+            <param name="kupovni"></param>
+        </member>
         <member name="M:SistemMenjacnice.Models.Valuta.#ctor(System.String)">
             <summary>
             Constructor with parametar of the class
@@ -144,6 +151,16 @@
         <member name="M:SistemMenjacnice.Utils.Helper.ProveraCelogBroja">
             <summary>
             Representing method checking integer
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Utils.Helper.IDKursneListe">
+            <summary>
+            Representing property of the ID
+            </summary>
+        </member>
+        <member name="F:SistemMenjacnice.Utils.Helper.IDValute">
+            <summary>
+            Representing property of the ID
             </summary>
         </member>
     </members>
