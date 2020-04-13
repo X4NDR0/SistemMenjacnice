@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using SistemMenjacnice.Enums;
-using SistemMenjacnice.Models;
+﻿using SistemMenjacnice.Models;
 using SistemMenjacnice.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SistemMenjacnice.Services
 {
@@ -74,8 +71,11 @@ namespace SistemMenjacnice.Services
             listaValuta.Add(valutaPLN);
             listaValuta.Add(valutaCZK);
 
-            KursnaLista kursnaLista1 = new KursnaLista { ID = 1, DatumFormiranja = "4/7/2020", listaValuta = listaValuta };
-            KursnaLista kursnaLista2 = new KursnaLista { ID = 2, DatumFormiranja = "2/7/2020", listaValuta = listaValuta };
+            //KursnaLista kursnaLista1 = new KursnaLista { ID = 1, DatumFormiranja = "4/7/2020", listaValuta = listaValuta };
+            //KursnaLista kursnaLista2 = new KursnaLista { ID = 2, DatumFormiranja = "2/7/2020", listaValuta = listaValuta };
+
+            KursnaLista kursnaLista1 = new KursnaLista("4/7/2020", listaValuta);
+            KursnaLista kursnaLista2 = new KursnaLista("2/7/2020", listaValuta);
 
             kursnaLista.Add(kursnaLista1);
             kursnaLista.Add(kursnaLista2);

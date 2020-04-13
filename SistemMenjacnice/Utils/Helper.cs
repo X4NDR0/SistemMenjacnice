@@ -16,7 +16,7 @@ namespace SistemMenjacnice.Utils
         {
             int number;
 
-            while (Int32.TryParse(Console.ReadLine(),out number) == false)
+            while (Int32.TryParse(Console.ReadLine(), out number) == false)
             {
                 Console.Write("Sorry,wrong input try again:");
             }
@@ -27,11 +27,11 @@ namespace SistemMenjacnice.Utils
         /// <summary>
         /// Representing property of the ID
         /// </summary>
-        public static int IDKursneListe;
+        public static int IDKursneListe = 1;
 
         /// <summary>
         /// Representing property of the ID
         /// </summary>
-        public static int IDValute;
+        public static int IDValute = 1;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemMenjacnice.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,12 +19,14 @@ namespace SistemMenjacnice.Models
         }
 
         /// <summary>
-        /// Representing constructor with 2 parametars
+        /// Representing constructor with 2 parameters.
         /// </summary>
-        /// <param name="prodajni"></param>
+        /// <param name="naziv"></param>
         /// <param name="kupovni"></param>
+        /// <param name="prodajni"></param>
         public Valuta(string naziv,double kupovni,double prodajni)
         {
+            ID = Helper.IDValute++;
             Naziv = naziv;
             Prodajni = prodajni;
             Srednji = (prodajni + kupovni) / 2;
@@ -43,6 +46,7 @@ namespace SistemMenjacnice.Models
                 Console.WriteLine("Error while reading the file.");
             }else
             {
+                ID = Helper.IDValute++;
                 Int32.TryParse(niz[0], out ID);
                 Naziv = niz[1];
                 Double.TryParse(niz[2], out Prodajni);

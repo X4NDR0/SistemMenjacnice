@@ -1,7 +1,6 @@
-﻿using SistemMenjacnice.Services;
+﻿using SistemMenjacnice.Utils;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SistemMenjacnice.Models
 {
@@ -19,6 +18,16 @@ namespace SistemMenjacnice.Models
         }
 
         /// <summary>
+        /// Representing empty contructor of the class
+        /// </summary>
+        public KursnaLista(string datumFormiranja, List<Valuta> listOfValues)
+        {
+            ID = Helper.IDKursneListe++;
+            DatumFormiranja = datumFormiranja;
+            listaValuta = listOfValues;
+        }
+
+        /// <summary>
         /// Cosntructor with paramethar of the class
         /// </summary>
         /// <param name="data"></param>
@@ -29,7 +38,8 @@ namespace SistemMenjacnice.Models
             if (niz.Length != 2)
             {
                 Console.WriteLine("Error while reading the file.");
-            }else
+            }
+            else
             {
                 Int32.TryParse(niz[0], out ID);
                 DatumFormiranja = niz[1];
