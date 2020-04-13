@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemMenjacnice.Utils
 {
@@ -22,6 +20,36 @@ namespace SistemMenjacnice.Utils
             }
 
             return number;
+        }
+
+        /// <summary>
+        /// Representing method for checking double
+        /// </summary>
+        public static double ProveraDecimalnogBroja()
+        {
+            double broj;
+
+            while (Double.TryParse(Console.ReadLine(),out broj) == false)
+            {
+                Console.Write("Sorry,wrong input try again:");
+            }
+
+            return broj;
+        }
+        
+        /// <summary>
+        /// Representing method for checking Date
+        /// </summary>
+        public static DateTime ProveraDatuma()
+        {
+            DateTime date = new DateTime();
+
+            while (DateTime.TryParse(Console.ReadLine(),out date) == false)
+            {
+                Console.Write("Sorry,wrong input try again:");
+            }
+
+            return date;
         }
 
         /// <summary>

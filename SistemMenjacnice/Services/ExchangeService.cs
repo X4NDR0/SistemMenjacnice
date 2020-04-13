@@ -71,11 +71,10 @@ namespace SistemMenjacnice.Services
             listaValuta.Add(valutaPLN);
             listaValuta.Add(valutaCZK);
 
-            //KursnaLista kursnaLista1 = new KursnaLista { ID = 1, DatumFormiranja = "4/7/2020", listaValuta = listaValuta };
-            //KursnaLista kursnaLista2 = new KursnaLista { ID = 2, DatumFormiranja = "2/7/2020", listaValuta = listaValuta };
+            DateTime add = new DateTime();
 
-            KursnaLista kursnaLista1 = new KursnaLista("4/7/2020", listaValuta);
-            KursnaLista kursnaLista2 = new KursnaLista("2/7/2020", listaValuta);
+            KursnaLista kursnaLista1 = new KursnaLista(add = new DateTime(2020, 4, 13), listaValuta);
+            KursnaLista kursnaLista2 = new KursnaLista(add = new DateTime(2020, 7, 2), listaValuta);
 
             kursnaLista.Add(kursnaLista1);
             kursnaLista.Add(kursnaLista2);
@@ -146,6 +145,11 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public static void WriteSelectedExchangeRate()
         {
+            foreach (KursnaLista kursnaLista in kursnaLista)
+            {
+                Console.WriteLine(kursnaLista.ID.ToString() + " " + kursnaLista.DatumFormiranja.ToString());
+            }
+
             Console.WriteLine("=================================");
 
             Console.Write("Unesite ID kursne liste:");
@@ -158,16 +162,10 @@ namespace SistemMenjacnice.Services
                     Console.WriteLine("=============KURSNA LISTA=============");
                     Console.WriteLine("ID:" + kursnaLista.ID + "\n" + "Datum:" + kursnaLista.DatumFormiranja);
 
-                    int index = kursnaLista.listaValuta.FindIndex(x => x.ID == IDKursneListe);
-
-                    Console.WriteLine("=============VALUTE=============");
-                    Console.WriteLine("ID:" + kursnaLista.listaValuta[index].ID);
-                    Console.WriteLine("Naziv:" + kursnaLista.listaValuta[index].Naziv);
-                    Console.WriteLine("Prodajna cena:{0:0.0000}", kursnaLista.listaValuta[index].Prodajni);
-                    Console.WriteLine("Srednja cena:{0:0.0000}", kursnaLista.listaValuta[index].Srednji);
-                    Console.WriteLine("Kupovna cena:{0:0.0000}", kursnaLista.listaValuta[index].Kupovni);
-
-                    Console.WriteLine("======================================");
+                    foreach (Valuta valuta in kursnaLista.ListaValuta)
+                    {
+                        Console.WriteLine("Naziv:" + valuta.Naziv + " Kupovna:{0:0.0000}" + " Srednja:{1:0.0000}" + " Prodajna:{2:0.0000}", valuta.Kupovni, valuta.Srednji, valuta.Prodajni);
+                    }
                 }
             }
         }
@@ -176,7 +174,54 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public static void CreateExchangeRate()
         {
+            List<Valuta> listaValutaAdd = new List<Valuta>();
+            DateTime datum = new DateTime();
 
+            foreach (Valuta valuta in listaValuta)
+            {
+                Console.Clear();
+                Console.WriteLine("Naziv:" + valuta.Naziv);
+
+                Console.Write("Unesite kupovnu cenu:");
+                valuta.Kupovni = Helper.ProveraDecimalnogBroja();
+
+                Console.Write("Unesite prodajnu cenu:");
+                valuta.Prodajni = Helper.ProveraDecimalnogBroja();
+
+                Valuta valutaAdd = new Valuta { ID = Helper.IDValute, Naziv = valuta.Naziv, Kupovni = valuta.Kupovni, Srednji = (valuta.Kupovni + valuta.Prodajni) / 2, Prodajni = valuta.Prodajni };
+                listaValutaAdd.Add(valutaAdd);
+            }
+
+            Console.Clear();
+
+            Console.WriteLine("1.Rucno unosenje datuma");
+            Console.WriteLine("2.Automatski");
+            Console.Write("Opcija:");
+            int opcija = Helper.ProveraCelogBroja();
+
+            switch (opcija)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Unesite u formatu(4,13,2020)");
+                    datum = Helper.ProveraDatuma();
+                    break;
+
+                case 2:
+                    Console.Clear();
+                    datum = DateTime.Now;
+                    break;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Ta opcija ne postoji!");
+                    break;
+            }
+            KursnaLista kursnaListaAdd = new KursnaLista(datum, listaValutaAdd);
+            kursnaLista.Add(kursnaListaAdd);
+
+            Console.Clear();
+            Console.WriteLine("Kursna lista je uspesno dodata!");
         }
     }
 

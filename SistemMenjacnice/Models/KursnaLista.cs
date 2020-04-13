@@ -20,11 +20,11 @@ namespace SistemMenjacnice.Models
         /// <summary>
         /// Representing empty contructor of the class
         /// </summary>
-        public KursnaLista(string datumFormiranja, List<Valuta> listOfValues)
+        public KursnaLista(DateTime datumFormiranja, List<Valuta> listOfValues)
         {
             ID = Helper.IDKursneListe++;
             DatumFormiranja = datumFormiranja;
-            listaValuta = listOfValues;
+            ListaValuta = listOfValues;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace SistemMenjacnice.Models
             else
             {
                 Int32.TryParse(niz[0], out ID);
-                DatumFormiranja = niz[1];
+                DateTime.TryParse(niz[1], out DatumFormiranja);
             }
 
         }
@@ -55,11 +55,11 @@ namespace SistemMenjacnice.Models
         /// <summary>
         /// Representing property of the DatumKreiranja
         /// </summary>
-        public string DatumFormiranja;
+        public DateTime DatumFormiranja;
 
         /// <summary>
         /// Representing list of the valuta
         /// </summary>
-        public List<Valuta> listaValuta = new List<Valuta>();
+        public List<Valuta> ListaValuta = new List<Valuta>();
     }
 }

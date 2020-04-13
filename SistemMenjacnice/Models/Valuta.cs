@@ -1,7 +1,5 @@
 ﻿using SistemMenjacnice.Utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemMenjacnice.Models
 {
@@ -24,7 +22,7 @@ namespace SistemMenjacnice.Models
         /// <param name="naziv"></param>
         /// <param name="kupovni"></param>
         /// <param name="prodajni"></param>
-        public Valuta(string naziv,double kupovni,double prodajni)
+        public Valuta(string naziv, double kupovni, double prodajni)
         {
             ID = Helper.IDValute++;
             Naziv = naziv;
@@ -44,7 +42,8 @@ namespace SistemMenjacnice.Models
             if (niz.Length != 4)
             {
                 Console.WriteLine("Error while reading the file.");
-            }else
+            }
+            else
             {
                 ID = Helper.IDValute++;
                 Int32.TryParse(niz[0], out ID);

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SistemMenjacnice.Services
+﻿namespace SistemMenjacnice.Services
 {
     class Program
     {
