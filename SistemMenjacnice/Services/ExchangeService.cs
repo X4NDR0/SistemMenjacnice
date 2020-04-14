@@ -82,9 +82,6 @@ namespace SistemMenjacnice.Services
             Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
             Helper.IDKursneListe++;
 
-            Helper.IDValute = listaValuta.Count;
-            Helper.IDValute++;
-
             do
             {
                 MenuText();
@@ -188,7 +185,7 @@ namespace SistemMenjacnice.Services
                 Console.Write("Unesite prodajnu cenu:");
                 valuta.Prodajni = Helper.ProveraDecimalnogBroja();
 
-                Valuta valutaAdd = new Valuta { ID = Helper.IDValute, Naziv = valuta.Naziv, Kupovni = valuta.Kupovni, Srednji = (valuta.Kupovni + valuta.Prodajni) / 2, Prodajni = valuta.Prodajni };
+                Valuta valutaAdd = new Valuta(valuta.Naziv, valuta.Kupovni, valuta.Prodajni);
                 listaValutaAdd.Add(valutaAdd);
             }
 
