@@ -22,10 +22,11 @@ namespace SistemMenjacnice.Models
         /// <param name="naziv"></param>
         /// <param name="kupovni"></param>
         /// <param name="prodajni"></param>
-        public Valuta(string naziv, double kupovni, double prodajni)
+        public Valuta(string naziv, string oznaka, double kupovni, double prodajni)
         {
             ID = Helper.IDValute++;
             Naziv = naziv;
+            Oznaka = oznaka;
             Prodajni = prodajni;
             Srednji = (prodajni + kupovni) / 2;
             Kupovni = kupovni;
@@ -39,7 +40,7 @@ namespace SistemMenjacnice.Models
         {
             string[] niz = data.Split(";");
 
-            if (niz.Length != 4)
+            if (niz.Length != 5)
             {
                 Console.WriteLine("Error while reading the file.");
             }
@@ -48,8 +49,9 @@ namespace SistemMenjacnice.Models
                 ID = Helper.IDValute++;
                 Int32.TryParse(niz[0], out ID);
                 Naziv = niz[1];
-                Double.TryParse(niz[2], out Prodajni);
-                Double.TryParse(niz[3], out Kupovni);
+                Oznaka = niz[2];
+                Double.TryParse(niz[3], out Prodajni);
+                Double.TryParse(niz[4], out Kupovni);
                 Srednji = (Prodajni + Kupovni) / 2;
             }
         }
@@ -63,6 +65,11 @@ namespace SistemMenjacnice.Models
         /// Representing property of the name
         /// </summary>
         public string Naziv;
+
+        /// <summary>
+        /// Representing property of the name(USD)
+        /// </summary>
+        public string Oznaka;
 
         /// <summary>
         /// Representing property of the prices

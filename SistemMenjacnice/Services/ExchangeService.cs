@@ -37,23 +37,23 @@ namespace SistemMenjacnice.Services
         {
             listaValuta = new List<Valuta>
             {
-                new Valuta("Euro", 117.0000, 118.5000),
-                new Valuta("USD", 102.2000, 109.3500),
-                new Valuta("CHF", 105.1100, 112.7000),
-                new Valuta("AUD", 64.8000, 69.2500),
-                new Valuta("CAD", 73.2000, 78.2500),
-                new Valuta("HRK", 14.1900, 15.8000),
-                new Valuta("DKK", 14.9700, 15.8000),
-                new Valuta("HUF", 0.3060, 0.3340),
-                new Valuta("NOK", 9.9600, 10.5000),
-                new Valuta("SEK", 10.2700, 10.8500),
-                new Valuta("GBP", 129.3500, 133.9897),
-                new Valuta("BAM", 56.5500, 61.5500),
-                new Valuta("RUB", 1.3100, 1.5600),
-                new Valuta("CNY", 14.4400, 16.1100),
-                new Valuta("JPY", 0.9423, 1.0414),
-                new Valuta("PLN", 24.7900, 26.4600),
-                new Valuta("CZK", 4.0100, 4.4500)
+                new Valuta("Evro","Euro", 117.0000, 118.5000),
+                new Valuta("Americki dolar","USD", 102.2000, 109.3500),
+                new Valuta("Svajcarski Franak","CHF", 105.1100, 112.7000),
+                new Valuta("Australijski Dolar","AUD", 64.8000, 69.2500),
+                new Valuta("Kanadski Dolar","CAD", 73.2000, 78.2500),
+                new Valuta("Hrvatska Kuna","HRK", 14.1900, 15.8000),
+                new Valuta("Danska Kruna","DKK", 14.9700, 15.8000),
+                new Valuta("Madjarska Forinta","HUF", 0.3060, 0.3340),
+                new Valuta("Norveska Kruna","NOK", 9.9600, 10.5000),
+                new Valuta("Svedska Kruna","SEK", 10.2700, 10.8500),
+                new Valuta("Funta Sterlinga","GBP", 129.3500, 133.9897),
+                new Valuta("Konvertibilna Marka","BAM", 56.5500, 61.5500),
+                new Valuta("Ruska rublja","RUB", 1.3100, 1.5600),
+                new Valuta("Kineski Juan","CNY", 14.4400, 16.1100),
+                new Valuta("Japanski Jen","JPY", 0.9423, 1.0414),
+                new Valuta("Poljski Zlot","PLN", 24.7900, 26.4600),
+                new Valuta("Ceska Kruna","CZK", 4.0100, 4.4500)
             };
 
             DateTime add = new DateTime();
@@ -116,10 +116,13 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public static void WriteAllCurrency()
         {
+            Console.WriteLine("ID   Naziv                    Oznaka      Prodajni    Srednji     Kupovni");
             foreach (Valuta valuta in listaValuta)
             {
-                Console.WriteLine(valuta.ID.ToString().PadRight(10) + valuta.Naziv.PadRight(10) + "{0:0.0000}" + "{1:0.0000}",valuta.Prodajni,valuta.Srednji);
+                Console.WriteLine("".PadRight(75, '-'));
+                Console.WriteLine(valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(12) + valuta.Prodajni.ToString("0.0000").PadRight(12) + valuta.Srednji.ToString("0.0000").PadRight(12) + valuta.Kupovni.ToString("0.0000"));
             }
+            Console.WriteLine("".PadRight(75, '-'));
         }
 
         /// <summary>
@@ -146,8 +149,10 @@ namespace SistemMenjacnice.Services
 
                     foreach (Valuta valuta in kursnaLista.ListaValuta)
                     {
-                        Console.WriteLine("Naziv:" + valuta.Naziv + " Kupovna:{0:0.0000}" + " Srednja:{1:0.0000}" + " Prodajna:{2:0.0000}", valuta.Kupovni, valuta.Srednji, valuta.Prodajni);
+                        Console.WriteLine("".PadRight(75, '-'));
+                        Console.WriteLine(valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(12) + valuta.Prodajni.ToString("0.0000").PadRight(12) + valuta.Srednji.ToString("0.0000").PadRight(12) + valuta.Kupovni.ToString("0.0000"));
                     }
+                    Console.WriteLine("".PadRight(75, '-'));
                 }
             }
         }
@@ -162,7 +167,7 @@ namespace SistemMenjacnice.Services
             foreach (Valuta valuta in listaValuta)
             {
                 Console.Clear();
-                Console.WriteLine("Naziv:" + valuta.Naziv);
+                Console.WriteLine("Oznaka" + valuta.Oznaka);
 
                 Console.Write("Unesite kupovnu cenu:");
                 valuta.Kupovni = Helper.ProveraDecimalnogBroja();
@@ -170,7 +175,7 @@ namespace SistemMenjacnice.Services
                 Console.Write("Unesite prodajnu cenu:");
                 valuta.Prodajni = Helper.ProveraDecimalnogBroja();
 
-                Valuta valutaAdd = new Valuta(valuta.Naziv, valuta.Kupovni, valuta.Prodajni);
+                Valuta valutaAdd = new Valuta(valuta.Naziv, valuta.Oznaka, valuta.Kupovni, valuta.Prodajni);
                 listaValutaAdd.Add(valutaAdd);
             }
 
