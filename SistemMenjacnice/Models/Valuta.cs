@@ -40,18 +40,17 @@ namespace SistemMenjacnice.Models
         {
             string[] niz = data.Split(";");
 
-            if (niz.Length != 5)
+            if (niz.Length != 4)
             {
                 Console.WriteLine("Error while reading the file.");
             }
             else
             {
                 ID = Helper.IDValute++;
-                Int32.TryParse(niz[0], out ID);
-                Naziv = niz[1];
-                Oznaka = niz[2];
-                Double.TryParse(niz[3], out Prodajni);
-                Double.TryParse(niz[4], out Kupovni);
+                Naziv = niz[0];
+                Oznaka = niz[1];
+                Double.TryParse(niz[2], out Prodajni);
+                Double.TryParse(niz[3], out Kupovni);
                 Srednji = (Prodajni + Kupovni) / 2;
             }
         }

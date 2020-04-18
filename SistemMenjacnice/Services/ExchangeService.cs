@@ -2,6 +2,7 @@
 using SistemMenjacnice.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace SistemMenjacnice.Services
@@ -35,37 +36,12 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public void ExchangeMenu()
         {
-            listaValuta = new List<Valuta>
-            {
-                new Valuta("Evro","Euro", 117.0000, 118.5000),
-                new Valuta("Americki dolar","USD", 102.2000, 109.3500),
-                new Valuta("Svajcarski Franak","CHF", 105.1100, 112.7000),
-                new Valuta("Australijski Dolar","AUD", 64.8000, 69.2500),
-                new Valuta("Kanadski Dolar","CAD", 73.2000, 78.2500),
-                new Valuta("Hrvatska Kuna","HRK", 14.1900, 15.8000),
-                new Valuta("Danska Kruna","DKK", 14.9700, 15.8000),
-                new Valuta("Madjarska Forinta","HUF", 0.3060, 0.3340),
-                new Valuta("Norveska Kruna","NOK", 9.9600, 10.5000),
-                new Valuta("Svedska Kruna","SEK", 10.2700, 10.8500),
-                new Valuta("Funta Sterlinga","GBP", 129.3500, 133.9897),
-                new Valuta("Konvertibilna Marka","BAM", 56.5500, 61.5500),
-                new Valuta("Ruska rublja","RUB", 1.3100, 1.5600),
-                new Valuta("Kineski Juan","CNY", 14.4400, 16.1100),
-                new Valuta("Japanski Jen","JPY", 0.9423, 1.0414),
-                new Valuta("Poljski Zlot","PLN", 24.7900, 26.4600),
-                new Valuta("Ceska Kruna","CZK", 4.0100, 4.4500)
-            };
-
             DateTime add = new DateTime();
 
-            KursnaLista kursnaLista1 = new KursnaLista(add = new DateTime(2020, 4, 13), listaValuta);
-            KursnaLista kursnaLista2 = new KursnaLista(add = new DateTime(2020, 7, 2), listaValuta);
+            LoadData();
 
-            kursnaLista.Add(kursnaLista1);
-            kursnaLista.Add(kursnaLista2);
-
-            Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
-            Helper.IDKursneListe++;
+            //Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
+            //Helper.IDKursneListe++;
 
             do
             {
@@ -116,13 +92,13 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public static void WriteAllCurrency()
         {
-            Console.WriteLine("ID   Naziv                    Oznaka      Prodajni    Srednji     Kupovni");
+            Console.WriteLine("| ID   Zemlja                   Oznaka |");
             foreach (Valuta valuta in listaValuta)
             {
-                Console.WriteLine("".PadRight(75, '-'));
-                Console.WriteLine(valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(12) + valuta.Prodajni.ToString("0.0000").PadRight(12) + valuta.Srednji.ToString("0.0000").PadRight(12) + valuta.Kupovni.ToString("0.0000"));
+                Console.WriteLine("".PadRight(40, '-'));
+                Console.WriteLine("| " + valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(7) + "|");
             }
-            Console.WriteLine("".PadRight(75, '-'));
+            Console.WriteLine("".PadRight(40, '-'));
         }
 
         /// <summary>
@@ -145,14 +121,17 @@ namespace SistemMenjacnice.Services
                 if (IDKursneListe == kursnaLista.ID)
                 {
                     Console.WriteLine("=============KURSNA LISTA=============");
-                    Console.WriteLine("ID:" + kursnaLista.ID + "\n" + "Datum:" + kursnaLista.DatumFormiranja);
+                    Console.WriteLine("ID:" + kursnaLista.ID + "\n" + "Datum:" + kursnaLista.DatumFormiranja.ToString("dd/MM/yyyy"));
+                    Console.WriteLine("".PadRight(113, '-'));
+
+                    Console.WriteLine("| Zemlja                        Oznaka              Prodajni            Srednji             Kupovni             |");
 
                     foreach (Valuta valuta in kursnaLista.ListaValuta)
                     {
-                        Console.WriteLine("".PadRight(75, '-'));
-                        Console.WriteLine(valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(12) + valuta.Prodajni.ToString("0.0000").PadRight(12) + valuta.Srednji.ToString("0.0000").PadRight(12) + valuta.Kupovni.ToString("0.0000"));
+                        Console.WriteLine("".PadRight(113, '-'));
+                        Console.WriteLine("| " + valuta.Naziv.PadRight(30) + valuta.Oznaka.PadRight(20) + valuta.Prodajni.ToString("0.0000").PadRight(20) + valuta.Srednji.ToString("0.0000").PadRight(20) + valuta.Kupovni.ToString("0.0000").PadRight(20) + "|");
                     }
-                    Console.WriteLine("".PadRight(75, '-'));
+                    Console.WriteLine("".PadRight(113, '-'));
                 }
             }
         }
@@ -167,7 +146,7 @@ namespace SistemMenjacnice.Services
             foreach (Valuta valuta in listaValuta)
             {
                 Console.Clear();
-                Console.WriteLine("Oznaka" + valuta.Oznaka);
+                Console.WriteLine("Valuta " + valuta.Oznaka);
 
                 Console.Write("Unesite kupovnu cenu:");
                 valuta.Kupovni = Helper.ProveraDecimalnogBroja();
@@ -209,6 +188,39 @@ namespace SistemMenjacnice.Services
 
             Console.Clear();
             Console.WriteLine("Kursna lista je uspesno dodata!");
+        }
+
+        /// <summary>
+        /// Representing method for load data
+        /// </summary>
+        public void LoadData()
+        {
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\\..\\..\\"));
+
+            StreamReader readDataValuta = new StreamReader(lokacija + "\\" + "data" + "\\" + "valuta.csv");
+            string dataValuta = readDataValuta.ReadToEnd();
+
+            StreamReader readDataKursnaLista = new StreamReader(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
+            string dataKursnaLista = readDataKursnaLista.ReadToEnd();
+
+            readDataValuta.Close();
+            readDataKursnaLista.Close();
+
+            string[] arrayOfDataValuta = dataValuta.Split("\n");
+            string[] arrayOfDataKursnaLista = dataKursnaLista.Split("\n");
+
+
+            foreach (var valuta in arrayOfDataValuta)
+            {
+                Valuta valutaLoad = new Valuta(valuta);
+                listaValuta.Add(valutaLoad);
+            }
+
+            foreach (var kursnaListaData in arrayOfDataKursnaLista)
+            {
+                KursnaLista kursnaListaLoad = new KursnaLista(kursnaListaData, listaValuta);
+                kursnaLista.Add(kursnaListaLoad);
+            }
         }
     }
 

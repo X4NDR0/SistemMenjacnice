@@ -1,6 +1,7 @@
 ﻿using SistemMenjacnice.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SistemMenjacnice.Models
 {
@@ -31,7 +32,8 @@ namespace SistemMenjacnice.Models
         /// Cosntructor with paramethar of the class
         /// </summary>
         /// <param name="data"></param>
-        public KursnaLista(string data)
+        /// <param name="listaValuta"></param>
+        public KursnaLista(string data,List<Valuta> listaValuta)
         {
             string[] niz = data.Split(";");
 
@@ -41,8 +43,17 @@ namespace SistemMenjacnice.Models
             }
             else
             {
-                Int32.TryParse(niz[0], out ID);
-                DateTime.TryParse(niz[1], out DatumFormiranja);
+                ID += Helper.IDKursneListe;
+                DateTime.TryParse(niz[0], out DatumFormiranja);
+                string numbers = niz[1];
+                string[] ids = numbers.Split(",");
+
+                foreach (var id in ids)
+                {
+                    Valuta valuta = listaValuta.Where(x => x.ID == Convert.ToInt32(id)).FirstOrDefault();
+                    ListaValuta.Add(valuta);
+                }
+
             }
 
         }
