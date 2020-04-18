@@ -33,7 +33,7 @@ namespace SistemMenjacnice.Models
         /// </summary>
         /// <param name="data"></param>
         /// <param name="listaValuta"></param>
-        public KursnaLista(string data,List<Valuta> listaValuta)
+        public KursnaLista(string data, List<Valuta> listaValuta)
         {
             string[] niz = data.Split(";");
 

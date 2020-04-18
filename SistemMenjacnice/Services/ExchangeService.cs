@@ -36,12 +36,10 @@ namespace SistemMenjacnice.Services
         /// </summary>
         public void ExchangeMenu()
         {
-            DateTime add = new DateTime();
-
             LoadData();
 
-            //Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
-            //Helper.IDKursneListe++;
+            Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
+            Helper.IDKursneListe++;
 
             do
             {
