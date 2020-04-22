@@ -59,6 +59,21 @@ namespace SistemMenjacnice.Models
         }
 
         /// <summary>
+        /// Representing method for save data
+        /// </summary>
+        public string Save(List<Valuta> listaValuta)
+        {
+            string id = string.Empty;
+            foreach (Valuta valuta in listaValuta)
+            {
+                id += valuta.ID + ",";
+            }
+
+            string data = DatumFormiranja.ToString("dd,MM,yyyy") + ";" + id.Remove(id.Length - 1);
+            return data;
+        }
+
+        /// <summary>
         /// Representing property of the ID
         /// </summary>
         public int ID;

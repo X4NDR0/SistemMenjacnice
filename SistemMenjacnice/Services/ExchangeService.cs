@@ -38,8 +38,8 @@ namespace SistemMenjacnice.Services
         {
             LoadData();
 
-            Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
-            Helper.IDKursneListe++;
+            //Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
+            //Helper.IDKursneListe++;
 
             do
             {
@@ -184,6 +184,8 @@ namespace SistemMenjacnice.Services
             KursnaLista kursnaListaAdd = new KursnaLista(datum, listaValutaAdd);
             kursnaLista.Add(kursnaListaAdd);
 
+            SaveData();
+
             Console.Clear();
             Console.WriteLine("Kursna lista je uspesno dodata!");
         }
@@ -208,17 +210,39 @@ namespace SistemMenjacnice.Services
             string[] arrayOfDataKursnaLista = dataKursnaLista.Split("\n");
 
 
-            foreach (var valuta in arrayOfDataValuta)
+            if (dataValuta != "")
             {
-                Valuta valutaLoad = new Valuta(valuta);
-                listaValuta.Add(valutaLoad);
+                foreach (var valuta in arrayOfDataValuta)
+                {
+                    Valuta valutaLoad = new Valuta(valuta);
+                    listaValuta.Add(valutaLoad);
+                }
             }
 
-            foreach (var kursnaListaData in arrayOfDataKursnaLista)
+            if(dataKursnaLista != "")
             {
-                KursnaLista kursnaListaLoad = new KursnaLista(kursnaListaData, listaValuta);
-                kursnaLista.Add(kursnaListaLoad);
+                foreach (var kursnaListaData in arrayOfDataKursnaLista)
+                {
+                    KursnaLista kursnaListaLoad = new KursnaLista(kursnaListaData, listaValuta);
+                    kursnaLista.Add(kursnaListaLoad);
+                }
             }
+        }
+
+        /// <summary>
+        /// Representing method for saving data
+        /// </summary>
+        public static void SaveData()
+        {
+            string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\\..\\..\\"));
+            StreamWriter saver = new StreamWriter(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
+
+
+            foreach (KursnaLista kursnaLista in kursnaLista)
+            {
+                saver.WriteLine(kursnaLista.Save(listaValuta));
+            }
+            saver.Close();
         }
     }
 
