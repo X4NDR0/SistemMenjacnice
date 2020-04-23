@@ -22,6 +22,7 @@ namespace SistemMenjacnice.Models
         /// <param name="naziv"></param>
         /// <param name="kupovni"></param>
         /// <param name="prodajni"></param>
+        /// <param name="oznaka"></param>
         public Valuta(string naziv, string oznaka, double kupovni, double prodajni)
         {
             ID = Helper.IDValute++;

@@ -69,7 +69,7 @@ namespace SistemMenjacnice.Models
                 id += valuta.ID + ",";
             }
 
-            string data = DatumFormiranja.ToString("dd,MM,yyyy") + ";" + id.Remove(id.Length - 1);
+            string data = DatumFormiranja.ToString("dd/MM/yyyy") + ";" + id.Remove(id.Length - 1);
             return data;
         }
 

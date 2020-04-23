@@ -237,7 +237,7 @@ namespace SistemMenjacnice.Services
 
             foreach (KursnaLista kursnaLista in kursnaLista)
             {
-                saver.WriteLine(kursnaLista.Save(listaValuta));
+                saver.Write(kursnaLista.Save(listaValuta) + "\n");
             }
             saver.Close();
         }
