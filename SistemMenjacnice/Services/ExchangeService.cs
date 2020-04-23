@@ -38,9 +38,6 @@ namespace SistemMenjacnice.Services
         {
             LoadData();
 
-            //Helper.IDKursneListe = kursnaLista.Max(x => x.ID);
-            //Helper.IDKursneListe++;
-
             do
             {
                 MenuText();
