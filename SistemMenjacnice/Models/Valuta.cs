@@ -57,6 +57,17 @@ namespace SistemMenjacnice.Models
         }
 
         /// <summary>
+        /// Representing Method for Save
+        /// </summary>
+        /// <returns></returns>
+        public string Save()
+        {
+            string data = Naziv + ";" + Oznaka + ";" + Kupovni + ";" + Prodajni;
+
+            return data;
+        }
+
+        /// <summary>
         /// Representing property of the id
         /// </summary>
         public int ID;

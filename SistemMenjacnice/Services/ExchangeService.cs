@@ -16,6 +16,7 @@ namespace SistemMenjacnice.Services
         /// Representing List of the valuta
         /// </summary>
         private static List<Valuta> listaValuta = new List<Valuta>();
+        private static List<Valuta> listaMeni = new List<Valuta>();
         private static List<KursnaLista> kursnaLista = new List<KursnaLista>();
         private static Enums.ExchangeMenu opcije;
 
@@ -88,7 +89,7 @@ namespace SistemMenjacnice.Services
         public static void WriteAllCurrency()
         {
             Console.WriteLine("| ID   Zemlja                   Oznaka |");
-            foreach (Valuta valuta in listaValuta)
+            foreach (Valuta valuta in listaMeni)
             {
                 Console.WriteLine("".PadRight(40, '-'));
                 Console.WriteLine("| " + valuta.ID.ToString().PadRight(5) + valuta.Naziv.PadRight(25) + valuta.Oznaka.PadRight(7) + "|");
@@ -181,6 +182,8 @@ namespace SistemMenjacnice.Services
             KursnaLista kursnaListaAdd = new KursnaLista(datum, listaValutaAdd);
             kursnaLista.Add(kursnaListaAdd);
 
+            listaValuta = listaValuta.Union(listaValutaAdd).ToList();
+
             SaveData();
 
             Console.Clear();
@@ -194,18 +197,22 @@ namespace SistemMenjacnice.Services
         {
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\\..\\..\\"));
 
-            StreamReader readDataValuta = new StreamReader(lokacija + "\\" + "data" + "\\" + "valuta.csv");
-            string dataValuta = readDataValuta.ReadToEnd();
+            StreamReader readDataValutaMeni = new StreamReader(lokacija + "\\" + "data" + "\\" + "meni.csv");
+            string dataValutaMeni = readDataValutaMeni.ReadToEnd();
 
             StreamReader readDataKursnaLista = new StreamReader(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
             string dataKursnaLista = readDataKursnaLista.ReadToEnd();
 
+            StreamReader readDataValuta = new StreamReader(lokacija + "\\" + "data" + "\\" + "valuta.csv");
+            string dataValuta = readDataValuta.ReadToEnd();
+
             readDataValuta.Close();
+            readDataValutaMeni.Close();
             readDataKursnaLista.Close();
 
-            string[] arrayOfDataValuta = dataValuta.Split("\n");
+            string[] arrayOfDataValutaMeni = dataValutaMeni.Split("\n");
             string[] arrayOfDataKursnaLista = dataKursnaLista.Split("\n");
-
+            string[] arrayOfDataValuta = dataValuta.Split("\n");
 
             if (dataValuta != "")
             {
@@ -216,7 +223,16 @@ namespace SistemMenjacnice.Services
                 }
             }
 
-            if(dataKursnaLista != "")
+            if (dataValutaMeni != "")
+            {
+                foreach (var valutaMeni in arrayOfDataValutaMeni)
+                {
+                    Valuta valutaLoad = new Valuta(valutaMeni);
+                    listaMeni.Add(valutaLoad);
+                }
+            }
+
+            if (dataKursnaLista != "")
             {
                 foreach (var kursnaListaData in arrayOfDataKursnaLista)
                 {
@@ -232,14 +248,21 @@ namespace SistemMenjacnice.Services
         public static void SaveData()
         {
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\\..\\..\\"));
-            StreamWriter saver = new StreamWriter(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
+            StreamWriter saverKursnaLista = new StreamWriter(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
 
+            StreamWriter saverValuta = new StreamWriter(lokacija + "\\" + "data" + "\\" + "valuta.csv");
+
+            foreach (Valuta valuta in listaValuta)
+            {
+                saverValuta.Write(valuta.Save() + "\n");
+            }
+            saverValuta.Close();
 
             foreach (KursnaLista kursnaLista in kursnaLista)
             {
-                saver.Write(kursnaLista.Save(listaValuta) + "\n");
+                saverKursnaLista.Write(kursnaLista.Save(listaValuta) + "\n");
             }
-            saver.Close();
+            saverKursnaLista.Close();
         }
     }
 
