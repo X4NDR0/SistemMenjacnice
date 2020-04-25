@@ -1,5 +1,6 @@
 ﻿using SistemMenjacnice.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace SistemMenjacnice.Models
 {
@@ -14,6 +15,25 @@ namespace SistemMenjacnice.Models
         public Valuta()
         {
 
+        }
+
+        /// <summary>
+        /// Representing constructor with parametar
+        /// </summary>
+        public Valuta(string data, int id)
+        {
+            string[] niz = data.Split(";");
+
+            if (niz.Length != 2)
+            {
+                Console.WriteLine("Error while reading the file.");
+            }
+            else
+            {
+                ID = id;
+                Naziv = niz[0];
+                Oznaka = niz[1];
+            }
         }
 
         /// <summary>

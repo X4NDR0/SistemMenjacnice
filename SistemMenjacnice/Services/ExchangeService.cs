@@ -225,10 +225,12 @@ namespace SistemMenjacnice.Services
 
             if (dataValutaMeni != "")
             {
+                int id = 1;
                 foreach (var valutaMeni in arrayOfDataValutaMeni)
                 {
-                    Valuta valutaLoad = new Valuta(valutaMeni);
+                    Valuta valutaLoad = new Valuta(valutaMeni, id);
                     listaMeni.Add(valutaLoad);
+                    id++;
                 }
             }
 
