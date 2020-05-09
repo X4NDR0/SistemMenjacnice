@@ -32,7 +32,7 @@ namespace SistemMenjacnice.Models
             {
                 ID = id;
                 Naziv = niz[0];
-                Oznaka = niz[1];
+                Oznaka = niz[1].Replace("\r", "");
             }
         }
 
