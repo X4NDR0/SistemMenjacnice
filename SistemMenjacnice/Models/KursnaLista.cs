@@ -43,7 +43,7 @@ namespace SistemMenjacnice.Models
             }
             else
             {
-                ID += Helper.IDKursneListe;
+                ID += Helper.IDKursneListe++;
                 DateTime.TryParse(niz[0], out DatumFormiranja);
                 string numbers = niz[1];
                 string[] ids = numbers.Split(",");
@@ -55,16 +55,15 @@ namespace SistemMenjacnice.Models
                 }
 
             }
-
         }
 
         /// <summary>
         /// Representing method for save data
         /// </summary>
-        public string Save(List<Valuta> listaValuta)
+        public string Save()
         {
             string id = string.Empty;
-            foreach (Valuta valuta in listaValuta)
+            foreach (Valuta valuta in ListaValuta)
             {
                 id += valuta.ID + ",";
             }

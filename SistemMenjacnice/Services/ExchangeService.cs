@@ -179,12 +179,12 @@ namespace SistemMenjacnice.Services
                     Console.WriteLine("Ta opcija ne postoji!");
                     break;
             }
-            KursnaLista kursnaListaAdd = new KursnaLista(datum, listaValutaAdd);
-            kursnaLista.Add(kursnaListaAdd);
+            KursnaLista trenutnaKursnaListaAdd = new KursnaLista(datum, listaValutaAdd);
+            kursnaLista.Add(trenutnaKursnaListaAdd);
+
+            SaveData(trenutnaKursnaListaAdd);
 
             listaValuta = listaValuta.Union(listaValutaAdd).ToList();
-
-            SaveData();
 
             Console.Clear();
             Console.WriteLine("Kursna lista je uspesno dodata!");
@@ -214,19 +214,19 @@ namespace SistemMenjacnice.Services
             string[] arrayOfDataKursnaLista = dataKursnaLista.Split("\n");
             string[] arrayOfDataValuta = dataValuta.Split("\n");
 
-            if (dataValuta != "")
+            foreach (var valuta in arrayOfDataValuta)
             {
-                foreach (var valuta in arrayOfDataValuta)
+                if (!string.IsNullOrEmpty(valuta))
                 {
                     Valuta valutaLoad = new Valuta(valuta);
                     listaValuta.Add(valutaLoad);
                 }
             }
 
-            if (dataValutaMeni != "")
+            int id = 1;
+            foreach (var valutaMeni in arrayOfDataValutaMeni)
             {
-                int id = 1;
-                foreach (var valutaMeni in arrayOfDataValutaMeni)
+                if (!string.IsNullOrEmpty(valutaMeni))
                 {
                     Valuta valutaLoad = new Valuta(valutaMeni, id);
                     listaMeni.Add(valutaLoad);
@@ -234,9 +234,9 @@ namespace SistemMenjacnice.Services
                 }
             }
 
-            if (dataKursnaLista != "")
+            foreach (var kursnaListaData in arrayOfDataKursnaLista)
             {
-                foreach (var kursnaListaData in arrayOfDataKursnaLista)
+                if (!string.IsNullOrEmpty(kursnaListaData))
                 {
                     KursnaLista kursnaListaLoad = new KursnaLista(kursnaListaData, listaValuta);
                     kursnaLista.Add(kursnaListaLoad);
@@ -247,23 +247,25 @@ namespace SistemMenjacnice.Services
         /// <summary>
         /// Representing method for saving data
         /// </summary>
-        public static void SaveData()
+        public static void SaveData(KursnaLista trenutnaKursnaLista)
         {
             string lokacija = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\\..\\..\\"));
-            StreamWriter saverKursnaLista = new StreamWriter(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv");
+            StreamWriter saverKursnaLista = new StreamWriter(lokacija + "\\" + "data" + "\\" + "kursnaLista.csv", true);
 
-            StreamWriter saverValuta = new StreamWriter(lokacija + "\\" + "data" + "\\" + "valuta.csv");
+            StreamWriter saverValuta = new StreamWriter(lokacija + "\\" + "data" + "\\" + "valuta.csv", true);
 
-            foreach (Valuta valuta in listaValuta)
+            //saverValuta.Write("\n");
+            //saverKursnaLista.Write("\n");
+
+            foreach (Valuta valuta in trenutnaKursnaLista.ListaValuta)
             {
-                saverValuta.Write(valuta.Save() + "\n");
+                saverValuta.WriteLine(valuta.Save());
             }
+
             saverValuta.Close();
 
-            foreach (KursnaLista kursnaLista in kursnaLista)
-            {
-                saverKursnaLista.Write(kursnaLista.Save(listaValuta) + "\n");
-            }
+            saverKursnaLista.WriteLine(trenutnaKursnaLista.Save());
+
             saverKursnaLista.Close();
         }
     }
