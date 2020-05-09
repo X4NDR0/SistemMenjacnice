@@ -124,8 +124,11 @@ namespace SistemMenjacnice.Services
 
                     foreach (Valuta valuta in kursnaLista.ListaValuta)
                     {
-                        Console.WriteLine("".PadRight(113, '-'));
-                        Console.WriteLine("| " + valuta.Naziv.PadRight(30) + valuta.Oznaka.PadRight(20) + valuta.Prodajni.ToString("0.0000").PadRight(20) + valuta.Srednji.ToString("0.0000").PadRight(20) + valuta.Kupovni.ToString("0.0000").PadRight(20) + "|");
+                        if (valuta != null)
+                        {
+                            Console.WriteLine("".PadRight(113, '-'));
+                            Console.WriteLine("| " + valuta.Naziv.PadRight(30) + valuta.Oznaka.PadRight(20) + valuta.Prodajni.ToString("0.0000").PadRight(20) + valuta.Srednji.ToString("0.0000").PadRight(20) + valuta.Kupovni.ToString("0.0000").PadRight(20) + "|");
+                        }
                     }
                     Console.WriteLine("".PadRight(113, '-'));
                 }
@@ -139,7 +142,7 @@ namespace SistemMenjacnice.Services
             List<Valuta> listaValutaAdd = new List<Valuta>();
             DateTime datum = new DateTime();
 
-            foreach (Valuta valuta in listaValuta)
+            foreach (Valuta valuta in listaMeni)
             {
                 Console.Clear();
                 Console.WriteLine("Valuta " + valuta.Oznaka);
