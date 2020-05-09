@@ -1,6 +1,5 @@
 ﻿using SistemMenjacnice.Utils;
 using System;
-using System.Collections.Generic;
 
 namespace SistemMenjacnice.Models
 {

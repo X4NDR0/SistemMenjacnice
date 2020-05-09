@@ -165,7 +165,7 @@ namespace SistemMenjacnice.Services
             {
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Unesite u formatu(4,13,2020)");
+                    Console.WriteLine("Unesite u formatu(2020.4.23)");
                     datum = Helper.ProveraDatuma();
                     break;
 
