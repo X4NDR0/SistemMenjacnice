@@ -254,9 +254,6 @@ namespace SistemMenjacnice.Services
 
             StreamWriter saverValuta = new StreamWriter(lokacija + "\\" + "data" + "\\" + "valuta.csv", true);
 
-            //saverValuta.Write("\n");
-            //saverKursnaLista.Write("\n");
-
             foreach (Valuta valuta in trenutnaKursnaLista.ListaValuta)
             {
                 saverValuta.WriteLine(valuta.Save());
